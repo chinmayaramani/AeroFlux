@@ -1,0 +1,87 @@
+[0m04:22:51.681196 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'start', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x105c61130>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x106cb0190>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x106cb04c0>]}
+
+
+============================== 04:22:51.685196 | 4fbdbca8-ce0b-4404-9cf3-8895e77f00a8 ==============================
+[0m04:22:51.685196 [info ] [MainThread]: Running with dbt=1.10.22
+[0m04:22:51.685570 [debug] [MainThread]: running dbt with arguments {'indirect_selection': 'eager', 'log_cache_events': 'False', 'use_colors': 'True', 'printer_width': '80', 'empty': 'None', 'no_print': 'None', 'send_anonymous_usage_stats': 'True', 'write_json': 'True', 'debug': 'False', 'invocation_command': 'dbt init aeroflux_transform', 'log_format': 'default', 'version_check': 'True', 'target_path': 'None', 'quiet': 'False', 'warn_error': 'None', 'static_parser': 'True', 'profiles_dir': '/Users/chinmayaramani/.dbt', 'use_experimental_parser': 'False', 'log_path': 'logs', 'fail_fast': 'False', 'warn_error_options': 'WarnErrorOptionsV2(error=[], warn=[], silence=[])', 'introspect': 'True', 'partial_parse': 'True', 'cache_selected_only': 'False'}
+[0m04:22:51.694224 [info ] [MainThread]: Creating dbt configuration folder at /Users/chinmayaramani/.dbt
+[0m04:22:51.695439 [debug] [MainThread]: Starter project path: /Users/chinmayaramani/Documents/AeroFlux/.venv/lib/python3.9/site-packages/dbt/include/starter_project
+[0m04:22:51.700518 [info ] [MainThread]: 
+Your new dbt project "aeroflux_transform" was created!
+
+For more information on how to configure the profiles.yml file,
+please consult the dbt documentation here:
+
+  https://docs.getdbt.com/docs/configure-your-profile
+
+One more thing:
+
+Need help? Don't hesitate to reach out to us via GitHub issues or on Slack:
+
+  https://community.getdbt.com/
+
+Happy modeling!
+
+[0m04:22:51.700802 [info ] [MainThread]: Setting up your profile.
+[0m04:24:48.505009 [error] [MainThread]: Encountered an error:
+
+[0m04:24:48.561407 [error] [MainThread]: Traceback (most recent call last):
+  File "/Users/chinmayaramani/Documents/AeroFlux/.venv/lib/python3.9/site-packages/dbt/cli/requires.py", line 178, in wrapper
+    result, success = func(*args, **kwargs)
+  File "/Users/chinmayaramani/Documents/AeroFlux/.venv/lib/python3.9/site-packages/dbt/cli/requires.py", line 128, in wrapper
+    return func(*args, **kwargs)
+  File "/Users/chinmayaramani/Documents/AeroFlux/.venv/lib/python3.9/site-packages/dbt/cli/main.py", line 483, in init
+    results = task.run()
+  File "/Users/chinmayaramani/Documents/AeroFlux/.venv/lib/python3.9/site-packages/dbt/task/init.py", line 346, in run
+    self.setup_profile(profile_name)
+  File "/Users/chinmayaramani/Documents/AeroFlux/.venv/lib/python3.9/site-packages/dbt/task/init.py", line 262, in setup_profile
+    self.create_profile_from_target(adapter, profile_name=profile_name)
+  File "/Users/chinmayaramani/Documents/AeroFlux/.venv/lib/python3.9/site-packages/dbt/task/init.py", line 179, in create_profile_from_target
+    self.create_profile_from_profile_template(profile_template, profile_name)
+  File "/Users/chinmayaramani/Documents/AeroFlux/.venv/lib/python3.9/site-packages/dbt/task/init.py", line 163, in create_profile_from_profile_template
+    target = self.generate_target_from_input(prompts, initial_target)
+  File "/Users/chinmayaramani/Documents/AeroFlux/.venv/lib/python3.9/site-packages/dbt/task/init.py", line 129, in generate_target_from_input
+    target[key] = click.prompt(
+  File "/Users/chinmayaramani/Documents/AeroFlux/.venv/lib/python3.9/site-packages/click/termui.py", line 164, in prompt
+    value = prompt_func(prompt)
+  File "/Users/chinmayaramani/Documents/AeroFlux/.venv/lib/python3.9/site-packages/click/termui.py", line 147, in prompt_func
+    raise Abort() from None
+click.exceptions.Abort
+
+[0m04:24:48.604286 [debug] [MainThread]: Resource report: {"command_name": "init", "command_success": false, "command_wall_clock_time": 116.973724, "process_in_blocks": "0", "process_kernel_time": 0.18565, "process_mem_max_rss": "102629376", "process_out_blocks": "0", "process_user_time": 0.987408}
+[0m04:24:48.604978 [debug] [MainThread]: Command `dbt init` failed at 04:24:48.604859 after 116.97 seconds
+[0m04:24:48.605570 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'end', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x105c61130>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x10712ac10>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x10712abe0>]}
+[0m04:24:48.606046 [debug] [MainThread]: Flushing usage events
+[0m04:24:48.893851 [debug] [MainThread]: An error was encountered while trying to flush usage events
+[0m19:36:32.654981 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'start', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x72aacade9430>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x72aacac15730>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x72aac9e9d070>]}
+
+
+============================== 19:36:32.665485 | d49e1400-c383-46ea-83e2-5fa092722d07 ==============================
+[0m19:36:32.665485 [info ] [MainThread]: Running with dbt=1.10.22
+[0m19:36:32.669235 [debug] [MainThread]: running dbt with arguments {'warn_error_options': 'WarnErrorOptionsV2(error=[], warn=[], silence=[])', 'target_path': 'None', 'version_check': 'True', 'introspect': 'True', 'printer_width': '80', 'write_json': 'True', 'no_print': 'None', 'debug': 'False', 'use_experimental_parser': 'False', 'invocation_command': 'dbt run --full-refresh --profiles-dir /opt/airflow/aeroflux_transform', 'quiet': 'False', 'log_path': 'logs', 'profiles_dir': '/opt/airflow/aeroflux_transform', 'send_anonymous_usage_stats': 'True', 'log_format': 'default', 'indirect_selection': 'eager', 'partial_parse': 'True', 'use_colors': 'True', 'warn_error': 'None', 'cache_selected_only': 'False', 'fail_fast': 'False', 'empty': 'False', 'log_cache_events': 'False', 'static_parser': 'True'}
+[0m19:36:32.671362 [error] [MainThread]: Encountered an error:
+Runtime Error
+  No dbt_project.yml found at expected path /opt/airflow/dbt_project.yml
+  Verify that each entry within packages.yml (and their transitive dependencies) contains a file named dbt_project.yml
+  
+[0m19:36:32.675168 [debug] [MainThread]: Resource report: {"command_name": "run", "command_success": false, "command_wall_clock_time": 0.11541317, "process_in_blocks": "34608", "process_kernel_time": 0.688692, "process_mem_max_rss": "92824", "process_out_blocks": "776", "process_user_time": 2.273906}
+[0m19:36:32.678332 [debug] [MainThread]: Command `dbt run` failed at 19:36:32.678014 after 0.12 seconds
+[0m19:36:32.680146 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'end', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x72aacade9430>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x72aacac15c40>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x72aac9de69d0>]}
+[0m19:36:32.682599 [debug] [MainThread]: Flushing usage events
+[0m19:36:32.825553 [debug] [MainThread]: An error was encountered while trying to flush usage events
+[0m22:32:43.455258 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'start', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7b726f28d400>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7b726e3451f0>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7b726e345130>]}
+
+
+============================== 22:32:43.467004 | 6d9ffded-5e0c-4b14-ab5d-f62fe07fdeb3 ==============================
+[0m22:32:43.467004 [info ] [MainThread]: Running with dbt=1.10.22
+[0m22:32:43.469650 [debug] [MainThread]: running dbt with arguments {'use_experimental_parser': 'False', 'write_json': 'True', 'log_cache_events': 'False', 'log_path': 'logs', 'no_print': 'None', 'target_path': 'None', 'warn_error_options': 'WarnErrorOptionsV2(error=[], warn=[], silence=[])', 'partial_parse': 'True', 'invocation_command': 'dbt run --full-refresh --project-dir /opt/airflow --profiles-dir /opt/airflow', 'quiet': 'False', 'debug': 'False', 'empty': 'False', 'use_colors': 'True', 'fail_fast': 'False', 'log_format': 'default', 'warn_error': 'None', 'printer_width': '80', 'cache_selected_only': 'False', 'profiles_dir': '/opt/airflow', 'introspect': 'True', 'version_check': 'True', 'send_anonymous_usage_stats': 'True', 'indirect_selection': 'eager', 'static_parser': 'True'}
+[0m22:32:43.473109 [error] [MainThread]: Encountered an error:
+Runtime Error
+  No dbt_project.yml found at expected path /opt/airflow/dbt_project.yml
+  Verify that each entry within packages.yml (and their transitive dependencies) contains a file named dbt_project.yml
+  
+[0m22:32:43.476405 [debug] [MainThread]: Resource report: {"command_name": "run", "command_success": false, "command_wall_clock_time": 0.10731921, "process_in_blocks": "184", "process_kernel_time": 0.290182, "process_mem_max_rss": "92436", "process_out_blocks": "0", "process_user_time": 2.114753}
+[0m22:32:43.479756 [debug] [MainThread]: Command `dbt run` failed at 22:32:43.479471 after 0.11 seconds
+[0m22:32:43.482637 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'end', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7b726f28d400>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7b726e28bd60>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7b726e28bb80>]}
+[0m22:32:43.484615 [debug] [MainThread]: Flushing usage events
+[0m22:32:43.643584 [debug] [MainThread]: An error was encountered while trying to flush usage events

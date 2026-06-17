@@ -1,0 +1,79 @@
+version: '3.8'
+
+services:
+  postgres:
+    image: postgres:15
+    container_name: aeroflux_postgres
+    environment:
+      POSTGRES_USER: aviation_admin
+      POSTGRES_PASSWORD: aviation_password
+      POSTGRES_DB: aeroflux_warehouse
+    ports:
+      - "5433:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    command: >
+      bash -c "
+      docker-entrypoint.sh postgres &
+      sleep 5;
+      psql -U aviation_admin -d aeroflux_warehouse -c 'CREATE DATABASE airflow_metadata;';
+      wait
+      "
+    networks:
+      - aeroflux_network
+
+  airflow-webserver:
+    image: apache/airflow:2.7.1-python3.9
+    container_name: aeroflux_airflow_webserver
+    restart: always
+    # Added global pip install in execution chain
+    command: bash -c "sleep 10 && pip install --user --no-cache-dir dbt-postgres && airflow db init && airflow users create --username airflow --firstname Admin --lastname Admin --role Admin --email admin@aeroflux.com --password airflow && airflow webserver -p 8080 -H 0.0.0.0"
+    environment:
+      - AIRFLOW__CORE__LOAD_EXAMPLES=False
+      - AIRFLOW__CORE__EXECUTOR=SequentialExecutor
+      - AIRFLOW__DATABASE__SQL_ALCHEMY_CONN=postgresql+psycopg2://aviation_admin:aviation_password@postgres:5432/airflow_metadata
+      - AIRFLOW__WEBSERVER__EXPOSE_CONFIG=True
+      # Forces the container to expose its path to local binaries
+      - PATH=/home/airflow/.local/bin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./dags:/opt/airflow/dags
+      - ./logs:/opt/airflow/logs
+      - ./plugins:/opt/airflow/plugins
+      - ./ingest_flights.py:/opt/airflow/ingest_flights.py
+      - ./aeroflux_transform:/opt/airflow/aeroflux_transform
+    networks:
+      - aeroflux_network
+    depends_on:
+      - postgres
+
+  airflow-scheduler:
+    image: apache/airflow:2.7.1-python3.9
+    container_name: aeroflux_airflow_scheduler
+    restart: always
+    # Added global pip install in execution chain
+    command: bash -c "sleep 20 && pip install --user --no-cache-dir dbt-postgres && airflow scheduler"
+    environment:
+      - AIRFLOW__CORE__LOAD_EXAMPLES=False
+      - AIRFLOW__CORE__EXECUTOR=SequentialExecutor
+      - AIRFLOW__DATABASE__SQL_ALCHEMY_CONN=postgresql+psycopg2://aviation_admin:aviation_password@postgres:5432/airflow_metadata
+      # Forces the container to expose its path to local binaries
+      - PATH=/home/airflow/.local/bin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+    volumes:
+      - ./dags:/opt/airflow/dags
+      - ./logs:/opt/airflow/logs
+      - ./plugins:/opt/airflow/plugins
+      - ./ingest_flights.py:/opt/airflow/ingest_flights.py
+      - ./aeroflux_transform:/opt/airflow/aeroflux_transform
+    networks:
+      - aeroflux_network
+    depends_on:
+      - postgres
+
+networks:
+  aeroflux_network:
+    driver: bridge
+
+volumes:
+  postgres_data:

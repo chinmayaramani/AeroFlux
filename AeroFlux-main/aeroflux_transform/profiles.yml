@@ -1,0 +1,12 @@
+aeroflux_transform:
+  target: dev
+  outputs:
+    dev:
+      type: postgres
+      host: postgres
+      port: 5432
+      user: aviation_admin
+      password: aviation_password
+      dbname: aeroflux_warehouse
+      schema: public
+      threads: 1
