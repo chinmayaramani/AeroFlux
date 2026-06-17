@@ -1,0 +1,49 @@
+[2026-06-17T10:35:36.296+0000] {taskinstance.py:1157} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: aeroflux_main_pipeline.transform_with_dbt manual__2026-06-17T10:35:31.169322+00:00 [queued]>
+[2026-06-17T10:35:36.300+0000] {taskinstance.py:1157} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: aeroflux_main_pipeline.transform_with_dbt manual__2026-06-17T10:35:31.169322+00:00 [queued]>
+[2026-06-17T10:35:36.300+0000] {taskinstance.py:1359} INFO - Starting attempt 1 of 2
+[2026-06-17T10:35:36.305+0000] {taskinstance.py:1380} INFO - Executing <Task(BashOperator): transform_with_dbt> on 2026-06-17 10:35:31.169322+00:00
+[2026-06-17T10:35:36.312+0000] {standard_task_runner.py:57} INFO - Started process 214 to run task
+[2026-06-17T10:35:36.312+0000] {standard_task_runner.py:84} INFO - Running: ['airflow', 'tasks', 'run', 'aeroflux_main_pipeline', 'transform_with_dbt', 'manual__2026-06-17T10:35:31.169322+00:00', '--job-id', '90', '--raw', '--subdir', 'DAGS_FOLDER/aeroflux_orchestrator.py', '--cfg-path', '/tmp/tmpsxw57xuc']
+[2026-06-17T10:35:36.314+0000] {standard_task_runner.py:85} INFO - Job 90: Subtask transform_with_dbt
+[2026-06-17T10:35:36.342+0000] {task_command.py:415} INFO - Running <TaskInstance: aeroflux_main_pipeline.transform_with_dbt manual__2026-06-17T10:35:31.169322+00:00 [running]> on host 9f30bc777676
+[2026-06-17T10:35:36.391+0000] {taskinstance.py:1660} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='aeroflux_team' AIRFLOW_CTX_DAG_ID='aeroflux_main_pipeline' AIRFLOW_CTX_TASK_ID='transform_with_dbt' AIRFLOW_CTX_EXECUTION_DATE='2026-06-17T10:35:31.169322+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='manual__2026-06-17T10:35:31.169322+00:00'
+[2026-06-17T10:35:36.392+0000] {subprocess.py:63} INFO - Tmp dir root location: /tmp
+[2026-06-17T10:35:36.394+0000] {subprocess.py:75} INFO - Running command: ['/bin/bash', '-c', 'cd /opt/airflow/aeroflux_transform && dbt run --profiles-dir .']
+[2026-06-17T10:35:36.402+0000] {subprocess.py:86} INFO - Output:
+[2026-06-17T10:35:37.637+0000] {subprocess.py:93} INFO - [0m10:35:37  Running with dbt=1.10.22
+[2026-06-17T10:35:37.845+0000] {subprocess.py:93} INFO - [0m10:35:37  Registered adapter: postgres=1.9.1
+[2026-06-17T10:35:38.362+0000] {subprocess.py:93} INFO - [0m10:35:38  Found 3 models, 4 data tests, 1 source, 447 macros
+[2026-06-17T10:35:38.363+0000] {subprocess.py:93} INFO - [0m10:35:38
+[2026-06-17T10:35:38.364+0000] {subprocess.py:93} INFO - [0m10:35:38  Concurrency: 1 threads (target='dev')
+[2026-06-17T10:35:38.364+0000] {subprocess.py:93} INFO - [0m10:35:38
+[2026-06-17T10:35:38.454+0000] {subprocess.py:93} INFO - [0m10:35:38  1 of 3 START sql table model public.my_first_dbt_model ......................... [RUN]
+[2026-06-17T10:35:38.537+0000] {subprocess.py:93} INFO - [0m10:35:38  1 of 3 OK created sql table model public.my_first_dbt_model .................... [[32mSELECT 2[0m in 0.08s]
+[2026-06-17T10:35:38.538+0000] {subprocess.py:93} INFO - [0m10:35:38  2 of 3 START sql table model public.stg_live_flights ........................... [RUN]
+[2026-06-17T10:35:38.555+0000] {subprocess.py:93} INFO - [0m10:35:38  2 of 3 ERROR creating sql table model public.stg_live_flights .................. [[31mERROR[0m in 0.02s]
+[2026-06-17T10:35:38.557+0000] {subprocess.py:93} INFO - [0m10:35:38  3 of 3 START sql view model public.my_second_dbt_model ......................... [RUN]
+[2026-06-17T10:35:38.591+0000] {subprocess.py:93} INFO - [0m10:35:38  3 of 3 OK created sql view model public.my_second_dbt_model .................... [[32mCREATE VIEW[0m in 0.03s]
+[2026-06-17T10:35:38.600+0000] {subprocess.py:93} INFO - [0m10:35:38
+[2026-06-17T10:35:38.601+0000] {subprocess.py:93} INFO - [0m10:35:38  Finished running 2 table models, 1 view model in 0 hours 0 minutes and 0.24 seconds (0.24s).
+[2026-06-17T10:35:38.684+0000] {subprocess.py:93} INFO - [0m10:35:38
+[2026-06-17T10:35:38.684+0000] {subprocess.py:93} INFO - [0m10:35:38  [31mCompleted with 1 error, 0 partial successes, and 0 warnings:[0m
+[2026-06-17T10:35:38.685+0000] {subprocess.py:93} INFO - [0m10:35:38
+[2026-06-17T10:35:38.685+0000] {subprocess.py:93} INFO - [0m10:35:38  [31mFailure in model stg_live_flights (models/example/stg_live_flights.sql)[0m
+[2026-06-17T10:35:38.685+0000] {subprocess.py:93} INFO - [0m10:35:38    Database Error in model stg_live_flights (models/example/stg_live_flights.sql)
+[2026-06-17T10:35:38.686+0000] {subprocess.py:93} INFO -   column "true_track" does not exist
+[2026-06-17T10:35:38.686+0000] {subprocess.py:93} INFO -   LINE 26:         true_track,
+[2026-06-17T10:35:38.686+0000] {subprocess.py:93} INFO -                    ^
+[2026-06-17T10:35:38.686+0000] {subprocess.py:93} INFO -   compiled code at target/run/aeroflux_transform/models/example/stg_live_flights.sql
+[2026-06-17T10:35:38.686+0000] {subprocess.py:93} INFO - [0m10:35:38
+[2026-06-17T10:35:38.687+0000] {subprocess.py:93} INFO - [0m10:35:38    compiled code at target/compiled/aeroflux_transform/models/example/stg_live_flights.sql
+[2026-06-17T10:35:38.687+0000] {subprocess.py:93} INFO - [0m10:35:38
+[2026-06-17T10:35:38.688+0000] {subprocess.py:93} INFO - [0m10:35:38  Done. PASS=2 WARN=0 ERROR=1 SKIP=0 NO-OP=0 TOTAL=3
+[2026-06-17T10:35:39.251+0000] {subprocess.py:97} INFO - Command exited with return code 1
+[2026-06-17T10:35:39.274+0000] {taskinstance.py:1935} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.9/site-packages/airflow/operators/bash.py", line 210, in execute
+    raise AirflowException(
+airflow.exceptions.AirflowException: Bash command failed. The command returned a non-zero exit code 1.
+[2026-06-17T10:35:39.277+0000] {taskinstance.py:1398} INFO - Marking task as UP_FOR_RETRY. dag_id=aeroflux_main_pipeline, task_id=transform_with_dbt, execution_date=20260617T103531, start_date=20260617T103536, end_date=20260617T103539
+[2026-06-17T10:35:39.286+0000] {standard_task_runner.py:104} ERROR - Failed to execute job 90 for task transform_with_dbt (Bash command failed. The command returned a non-zero exit code 1.; 214)
+[2026-06-17T10:35:39.302+0000] {local_task_job_runner.py:228} INFO - Task exited with return code 1
+[2026-06-17T10:35:39.328+0000] {taskinstance.py:2776} INFO - 0 downstream tasks scheduled from follow-on schedule check

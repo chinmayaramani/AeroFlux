@@ -1,0 +1,19 @@
+# Python virtual environments
+.venv/
+venv/
+__pycache__/
+*.pyc
+
+# Mac system files
+.DS_Store
+
+# Airflow logs and temporary files
+logs/
+airflow-*.err
+airflow-*.log
+airflow-*.pid
+
+# dbt target folders and operational files
+aeroflux_transform/target/
+aeroflux_transform/dbt_packages/
+aeroflux_transform/logs/
