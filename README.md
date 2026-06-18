@@ -1,4 +1,4 @@
-# AeroFlux — Flight Telemetry Pipeline
+# AeroFlux : Flight Telemetry ELT Pipeline
  
 AeroFlux is a data engineering portfolio project that ingests real-time flight data, transforms it through a layered data model, and visualizes it in an interactive Power BI dashboard.
  
