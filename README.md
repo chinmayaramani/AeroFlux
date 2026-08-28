@@ -7,8 +7,9 @@ AeroFlux is a data engineering portfolio project that ingests real-time flight d
 ## What It Does
  
 - **Ingest** — Python scripts scheduled by Apache Airflow pull live aircraft state vectors from the OpenSky Network API
-- **Load** — Raw flight data is written directly into a PostgreSQL database
+- **Load** — Raw flight data is written directly into PostgreSQL (local) and Snowflake (cloud) data warehouses
 - **Transform** — dbt cleans the raw data, models it into a star schema, and casts epoch timestamps to native SQL timestamps
+- **Test & Document** — Automated schema assertions enforce data quality (`unique`, `not_null`) alongside auto-generated lineage DAG documentation
 - **Visualize** — Power BI connects to the final tables and renders a map-based flight tracking dashboard with altitude and timeline filters
 ---
  
@@ -18,8 +19,8 @@ AeroFlux is a data engineering portfolio project that ingests real-time flight d
 |---|---|
 | **Orchestration** | Apache Airflow 2.7.1 |
 | **Ingestion** | Python 3 |
-| **Storage** | PostgreSQL 15 |
-| **Transformation** | dbt Core (postgres adapter) |
+| **Storage & Warehousing** | Snowflake (Cloud DW) / PostgreSQL 15 (Local DW) |
+| **Transformation & Testing** | dbt Core (`dbt-snowflake`, `dbt-postgres`) |
 | **Containerization** | Docker & Docker Compose |
 | **Visualization** | Power BI Desktop |
  
@@ -42,17 +43,20 @@ docker-compose up -d
  
 > PostgreSQL will be available on port `5433` on your host machine.
  
-### Step 2 — Run the dbt models
- 
+### Step 2 — Run the dbt models & tests
+
 ```bash
 cd aeroflux_transform
-dbt run
-```
- 
-Optionally validate with tests:
- 
-```bash
-dbt test
+
+# Run against Snowflake Cloud Data Warehouse
+dbt build --target dev_snowflake --profiles-dir .
+
+# Run against Local PostgreSQL Database
+dbt build --target dev --profiles-dir .
+
+# View interactive documentation and lineage DAG
+dbt docs generate --target dev_snowflake --profiles-dir .
+dbt docs serve --profiles-dir .
 ```
  
 ### Step 3 — Open the dashboard
@@ -71,17 +75,15 @@ User     : aviation_admin
  
 ---
  
-## Data Model
+## Data Model & Testing (dbt Core)
  
-The dbt layer produces three models:
+The dbt layer produces three star-schema models with 100% automated test coverage:
  
-| Model | Type | Description |
-|---|---|---|
-| **`stg_live_flights`** | View | Cleaned and filtered staging layer |
-| **`dim_aircraft`** | Table | One row per unique aircraft — icao24, callsign, country |
-| **`fct_flight_telemetry`** | Table | One row per positional snapshot — lat, lon, altitude, velocity |
- 
-Raw Unix epoch timestamps are converted to native `TIMESTAMP` inside dbt so Power BI receives proper date/time fields with no Power Query conversion required.
+| Model | Type | Description | Key Tests |
+|---|---|---|---|
+| **`stg_live_flights`** | View | Cleaned and filtered staging layer | `not_null` (icao24, lat, lon) |
+| **`dim_aircraft`** | Table | Dimension table containing unique aircraft records — icao24, callsign, country | `unique`, `not_null` (icao24) |
+| **`fct_flight_telemetry`** | Table | Fact table recording positional snapshots — lat, lon, altitude, velocity | `unique`, `not_null` (telemetry_id) |
  
 ---
  
