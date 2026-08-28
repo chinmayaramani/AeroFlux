@@ -1,4 +1,7 @@
+# Local Snowflake / Postgres credentials
+profiles.yml
 
+# dbt compilation & package directories
 target/
 dbt_packages/
 logs/

@@ -1,19 +1,22 @@
-# Virtual Environment
+# Virtual Environments & Python Cache
 .venv/
 venv/
 __pycache__/
-*.pyc
+*.py[cod]
+*$py.class
 
-# dbt Artifacts & Credentials
-profiles.yml
-**/profiles.yml
-target/
-**/target/
-dbt_packages/
-**/dbt_packages/
+# Airflow Logs & Databases
 logs/
-**/logs/
+airflow.cfg
+airflow.db
 
-# OS / IDE
+# OS & Editor
 .DS_Store
 .vscode/
+AeroFlux-main/
+
+# Global dbt ignores (catch-all)
+**/profiles.yml
+**/target/
+**/dbt_packages/
+**/logs/
