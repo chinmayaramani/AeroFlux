@@ -1,0 +1,19 @@
+# Virtual Environment
+.venv/
+venv/
+__pycache__/
+*.pyc
+
+# dbt Artifacts & Credentials
+profiles.yml
+**/profiles.yml
+target/
+**/target/
+dbt_packages/
+**/dbt_packages/
+logs/
+**/logs/
+
+# OS / IDE
+.DS_Store
+.vscode/

@@ -1,0 +1,9 @@
+version: 2
+
+sources:
+  - name: raw_data
+    # Snowflake uses AEROFLUX_DB.RAW; Postgres uses aeroflux_warehouse.public
+    database: "{{ 'AEROFLUX_DB' if target.type == 'snowflake' else 'aeroflux_warehouse' }}"
+    schema: "{{ 'RAW' if target.type == 'snowflake' else 'public' }}"
+    tables:
+      - name: raw_flights

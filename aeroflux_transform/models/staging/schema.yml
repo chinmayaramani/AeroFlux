@@ -1,0 +1,31 @@
+version: 2
+
+models:
+  - name: stg_live_flights
+    description: "Cleaned and filtered staging layer for live flight telemetry"
+    columns:
+      - name: icao24
+        tests:
+          - not_null
+      - name: latitude
+        tests:
+          - not_null
+      - name: longitude
+        tests:
+          - not_null
+
+  - name: dim_aircraft
+    description: "Dimension table containing unique aircraft records"
+    columns:
+      - name: icao24
+        tests:
+          - not_null
+          - unique
+
+  - name: fct_flight_telemetry
+    description: "Fact table recording aircraft positional snapshots"
+    columns:
+      - name: telemetry_id
+        tests:
+          - not_null
+          - unique
